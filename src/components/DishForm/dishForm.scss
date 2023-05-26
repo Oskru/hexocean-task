@@ -1,0 +1,14 @@
+.input-error {
+  border: 2px solid red;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+input, label, button {
+  display: block;
+  margin-top: 10px;
+}
