@@ -1,3 +1,5 @@
+import React from 'react';
+
 // styles imports
 import './dishForm.scss';
 
@@ -10,7 +12,10 @@ import FormField from '../FormField/FormField';
 import FormSelect from '../FormSelect/FormSelect';
 
 function DishForm() {
-  console.log('Render: DishForm');
+  const [fetchData, setFetchData] = React.useState({
+    ok: null,
+    error: '',
+  });
 
   const initialValues = {
     name: '',
@@ -22,10 +27,57 @@ function DishForm() {
     slices_of_bread: '',
   };
 
+  const resetFetchData = () => {
+    setFetchData({
+      ok: null,
+      error: '',
+    });
+  };
+
   const handleSubmit = async (values, actions) => {
-    await new Promise((r) => setTimeout(r, 1000));
-    alert(JSON.stringify(values, null, 2));
-    // actions.resetForm();
+    switch (values.type) {
+      case 'pizza':
+        delete values.spiciness_scale;
+        delete values.slices_of_bread;
+        break;
+      case 'soup':
+        delete values.no_of_slices;
+        delete values.diameter;
+        delete values.slices_of_bread;
+        break;
+      case 'sandwich':
+        delete values.no_of_slices;
+        delete values.diameter;
+        delete values.spiciness_scale;
+        break;
+    }
+
+    try {
+      resetFetchData();
+
+      const response = await fetch(
+        'https://umzzcc503l.execute-api.us-west-2.amazonaws.com/dishes',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(values),
+        },
+      );
+
+      setFetchData(
+        response.ok
+          ? { ok: true, error: '' }
+          : { ok: false, error: await response.json() },
+      );
+    } catch (error) {
+      setFetchData({
+        ok: false,
+        error: error.message,
+      });
+    }
+    actions.resetForm();
   };
 
   return (
@@ -34,8 +86,12 @@ function DishForm() {
       validationSchema={dishSchema}
       onSubmit={handleSubmit}
     >
-      {({ values, isSubmitting }) => (
-        <Form autoComplete="off">
+      {({ values, isSubmitting, errors, touched }) => (
+        <Form
+          autoComplete="off"
+          // line below ensures that there are no unneeded re-renders
+          onChange={fetchData.error || fetchData.ok ? resetFetchData : null}
+        >
           <FormField
             label="name"
             name="name"
@@ -46,7 +102,7 @@ function DishForm() {
           <FormField
             label="preparation_time"
             name="preparation_time"
-            placeholder="00:00:00"
+            placeholder="in hh:mm:ss format"
           />
 
           <FormSelect
@@ -102,6 +158,11 @@ function DishForm() {
 
           <button
             type="submit"
+            disabled={
+              isSubmitting ||
+              Object.keys(errors).length > 0 ||
+              Object.keys(touched).length === 0
+            }
             className={
               isSubmitting
                 ? 'submit-button submit-button--submitting'
@@ -110,6 +171,13 @@ function DishForm() {
           >
             Submit
           </button>
+          {fetchData.error && (
+            <div className="error-message">
+              An error has occured: {fetchData.message}
+            </div>
+          )}
+
+          {fetchData.ok && <div className="success-message">Dish added!</div>}
         </Form>
       )}
     </Formik>
