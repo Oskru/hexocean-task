@@ -19,7 +19,7 @@ function FormSelect({ label, options, ...props }) {
         {...field}
         className={meta.touched && meta.error ? 'input-error' : null}
       >
-        <option></option>
+        <option value="" disabled hidden></option>
         {options.map((option) => (
           <option key={option.label} value={option.value}>
             {option.label}
