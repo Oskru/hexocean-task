@@ -1,12 +1,15 @@
+// styles imports
+import './app.scss';
+
 // component imports
 import DishForm from './components/DishForm/DishForm';
 
 function App() {
   return (
-    <>
-      <h1>Add a dish!</h1>
+    <div className="App">
+      <h1 className="App__header">Add a dish!</h1>
       <DishForm />
-    </>
+    </div>
   );
 }
 

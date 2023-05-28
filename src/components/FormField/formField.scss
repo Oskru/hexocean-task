@@ -1,0 +1,35 @@
+@import '../../styles/index.scss';
+
+
+.formfield {
+  width: 100%;
+  margin-bottom: 22px;
+  display: flex;
+  flex-flow: column nowrap;
+
+  &__input {
+    display: block;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    @include body1;
+    color: var(--color-primary-black);
+    background-color: var(--color-primary);
+    outline: none;
+
+    &:hover, &:focus {
+      background-color: var(--color-secondary-green);
+    }
+
+    &--error {
+      outline: 3px solid var(--color-primary-darkblue);
+    }
+  }
+
+  &__error-message {
+    @include body2;
+    color: var(--color-primary-darkblue);
+    margin-left: 10px;
+  }
+}

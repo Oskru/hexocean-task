@@ -1,4 +1,8 @@
+// form helpers imports
 import { useField } from 'formik';
+
+// styles imports
+import './formSelect.scss';
 
 /**
  * This is a component for rendering a select input field with label and options.
@@ -12,24 +16,35 @@ function FormSelect({ label, options, ...props }) {
   const [field, meta] = useField(props);
 
   return (
-    <>
-      <label htmlFor={label}>{label}</label>
+    <div className="formselect">
+      <label htmlFor={label} className="label formselect__label">
+        {label}
+      </label>
       <select
         {...props}
         {...field}
-        className={meta.touched && meta.error ? 'input-error' : null}
+        id={label}
+        className={
+          meta.touched && meta.error
+            ? 'formselect__select formselect__select--error'
+            : 'formselect__select'
+        }
       >
         <option value="" disabled hidden></option>
         {options.map((option) => (
-          <option key={option.label} value={option.value}>
+          <option
+            key={option.label}
+            value={option.value}
+            className="formselect__option"
+          >
             {option.label}
           </option>
         ))}
       </select>
       {meta.touched && meta.error ? (
-        <div className="error-message">{meta.error}</div>
+        <div className="formselect__error-message">{meta.error}</div>
       ) : null}
-    </>
+    </div>
   );
 }
 
