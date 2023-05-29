@@ -4,6 +4,10 @@ This project is a React SPA that sends details about a user's dish to a given AP
 
 <b>Time it took to create this project: 6-8 hours.</b>
 
+## Live preview
+
+Live preview can be found in here: https://dish-submitter.netlify.app/
+
 ## Tools / libraries used to build
 
 - React.js
