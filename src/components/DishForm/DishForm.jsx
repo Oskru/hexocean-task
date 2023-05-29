@@ -70,7 +70,7 @@ function DishForm() {
       resetFetchData();
 
       const response = await fetch(
-        'https://umzzcc503l.execute-api.us-west-2.amazonaws.com/dishes',
+        'https://umzzcc503l.execute-api.us-west-2.amazonaws.com/dishes/',
         {
           method: 'POST',
           headers: {
