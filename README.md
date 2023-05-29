@@ -2,6 +2,8 @@
 
 This project is a React SPA that sends details about a user's dish to a given API endpoint with POST request.
 
+<b>Time it took to create this project: 6-8 hours.</b>
+
 ## Tools / libraries used to build
 
 - React.js
