@@ -19,7 +19,7 @@ This project is a React SPA that sends details about a user's dish to a given AP
 
 1. Clone this repository using `git clone`
 2. Navigate to the project directory.
-3. Run the following command: `npm run dev`
+3. Run the following commands: `npm install` and `npm run dev`
 
 This will start the server on `http://localhost:5173`
 
