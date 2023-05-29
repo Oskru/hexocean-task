@@ -1,6 +1,6 @@
 # Hex Ocean dish submitter task
 
-This project is a React SPA that sends details about user's dish to a given API endpoint with POST request.
+This project is a React SPA that sends details about a user's dish to a given API endpoint with POST request.
 
 ## Tools / libraries used to build
 
