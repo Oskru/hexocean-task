@@ -21,6 +21,7 @@ export const dishSchema = Yup.object().shape({
     then: () =>
       Yup.number()
         .min(1, 'no_of_slices must be min. 1')
+        .integer('no_of_slices must be an integer')
         .required('no_of_slices is required'),
   }),
   diameter: Yup.number().when('type', {
@@ -36,6 +37,7 @@ export const dishSchema = Yup.object().shape({
       Yup.number()
         .min(1, 'spiciness_scale must be between 1 and 10')
         .max(10, 'spiciness_scale must be between 1 and 10')
+        .integer('spiciness_scale must be an integer')
         .required('spiciness_scale is required'),
   }),
   slices_of_bread: Yup.number().when('type', {
@@ -43,6 +45,7 @@ export const dishSchema = Yup.object().shape({
     then: () =>
       Yup.number()
         .min(1, 'slices_of_bread must be min. 1')
+        .integer('slices_of_bread must be an integer')
         .required('slices_of_bread is required'),
   }),
 });

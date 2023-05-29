@@ -148,6 +148,7 @@ function DishForm() {
                 name="diameter"
                 type="number"
                 min="1"
+                step="0.1"
                 placeholder="in cm"
                 className="form__pizza-input"
               />
